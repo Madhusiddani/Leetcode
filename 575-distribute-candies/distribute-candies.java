@@ -1,12 +1,14 @@
-import java.util.*;
-
 class Solution {
     public int distributeCandies(int[] candyType) {
-        Set<Integer> unique = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
 
-        for (int candy : candyType) {
-            unique.add(candy);
+        for (int i = 0; i < candyType.length; i++) {
+            set.add(candyType[i]);
         }
-        return Math.min(unique.size(), candyType.length / 2);
+
+        int maxAllowed = candyType.length / 2;
+        int uniqueTypes = set.size();
+
+        return Math.min(uniqueTypes, maxAllowed);
     }
 }
