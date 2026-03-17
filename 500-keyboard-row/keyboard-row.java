@@ -1,33 +1,29 @@
 class Solution {
-    public String[] findWords(String[] arr) {
-        String s1 = "qwertyuiop";
-        String s2 = "asdfghjkl";
-        String s3 = "zxcvbnm";
+    public String[] findWords(String[] words) {
+        int[] map = new int[26];
 
-        List<String> list = new ArrayList<>();
+        for (char c : "qwertyuiop".toCharArray()) map[c - 'a'] = 1;
+        for (char c : "asdfghjkl".toCharArray()) map[c - 'a'] = 2;
+        for (char c : "zxcvbnm".toCharArray()) map[c - 'a'] = 3;
 
-        for (int i = 0; i < arr.length; i++) {
-            String[] a = arr[i].toLowerCase().split("");
-            boolean flag = true;
-            String temp = "";
+        List<String> result = new ArrayList<>();
 
-            if (s1.contains(a[0]))
-                temp = s1;
-            else if (s2.contains(a[0]))
-                temp = s2;
-            else 
-                temp = s3;
-            
-            for (int j = 1; j < a.length; j++) 
-                if (!temp.contains(a[j])) {
-                    flag = false;
+        for (String word : words) {
+            String lower = word.toLowerCase();
+            int row = map[lower.charAt(0) - 'a'];
+
+            boolean valid = true;
+
+            for (char c : lower.toCharArray()) {
+                if (map[c - 'a'] != row) {
+                    valid = false;
                     break;
                 }
-            
-            if (flag) 
-                list.add(arr[i]);
+            }
+
+            if (valid) result.add(word);
         }
 
-        return list.toArray(new String[list.size()]);
+        return result.toArray(new String[0]);
     }
 }
