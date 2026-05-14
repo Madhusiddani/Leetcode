@@ -1,42 +1,31 @@
-
 class MyStack {
-
-    private Queue<Integer> q1;
-    private Queue<Integer> q2;
-
-    public MyStack() {
-        q1 = new ArrayDeque<>();
-        q2 = new ArrayDeque<>();
+    Queue<Integer> q1 = new ArrayDeque<>();
+    Queue<Integer> q2 = new ArrayDeque<>();
+    public MyStack() {   
     }
     
     public void push(int x) {
-        // push into helper queue
-        q2.add(x);
-
-        // move all elements from q1 to q2
-        while (!q1.isEmpty()) {
-            q2.add(q1.poll());
-        }
-
-        // swap q1 and q2
-        Queue<Integer> temp = q1;
-        q1 = q2;
-        q2 = temp;
+      q2.add(x);
+      while(!q1.isEmpty()){
+        q2.add(q1.poll());
+      }  
+      Queue<Integer> temp =q1;
+      q1=q2;
+      q2=temp;
     }
     
     public int pop() {
-        return q1.poll();
+       return q1.poll(); 
     }
     
     public int top() {
-        return q1.peek();
+       return q1.peek(); 
     }
     
     public boolean empty() {
-        return q1.isEmpty();
+       return q1.isEmpty(); 
     }
 }
-
 
 /**
  * Your MyStack object will be instantiated and called as such:
